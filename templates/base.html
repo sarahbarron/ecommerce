@@ -1,30 +1,47 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load bootstrap_tags %}
 <html>
     <head>
-        <title>{% block page_title %}{% endblock %}</title>
+        <title>Ecommerce</title>
   
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" />
+        
         <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        {% block head_js %}
+        {% endblock head_js %}
     </head>
     <body>
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' %}">Profile</a></li>
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    <li><a href="{% url 'profile' %}">
+                        <i class="fa fa-user"></i>Profile</a></li>
+                    <li><a href="{% url 'logout' %}">
+                        <i class="fa fa-sign-out"></i>Logout</a></li>
                 
                 {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                    <li><a href="{% url 'registration' %}">Register</a></li>
+                    <li><a href="{% url 'login' %}">
+                        <i class="fa fa-sign-in"></i>Login</a></li>
+                    <li><a href="{% url 'registration' %}">
+                        <i class="fa fa-user-plus"></i>Register</a></li>
                 {% endif %}
+                
+                <li>
+                    <a href={% url 'view_cart' %}>
+                        <i class="fa fa-shopping-cart"></i>Cart
+                        {% if product_count > 0 %}
+                        <label class="badge badge-warning">{{product_count}}</label>
+                        {% endif %}
+                    </a>
+                </li>
                     
             </ul>
         </nav>
@@ -34,6 +51,14 @@
             {% for message in messages %} {{ message }} {% endfor %}
         </div>
         {% endif %}
+        <div class="container">
+            <div class="display">
+                <form action="{% url 'search' %}" method="get">
+                    <input type="text" name="q">
+                    <button type="submit"> Search </button>
+                </form>
+            </div>
+        </div>
         
         {% block content %}{% endblock %}
         
