@@ -7,6 +7,7 @@ colorama==0.2.5
 dj-database-url==0.5.0
 django-forms-bootstrap==3.1.0
 django-storages==1.6.6
+gunicorn==19.8.1
 docutils==0.14
 html5lib==0.999
 jmespath==0.9.3
