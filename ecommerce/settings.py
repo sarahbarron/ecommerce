@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'cart',
     'search',
     'checkout',
-    'storages'
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -142,13 +142,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+
+#caches static files for along time into the future
 AWS_S3_OBJECT_PARAMETERS = {
     'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
     'CacheControl': 'max-age=94608000',
 }
 
+
 AWS_STORAGE_BUCKET_NAME = 'sarah-ecommerce'
 AWS_S3_REGION_NAME = 'eu-west-1'
+#while we are running locally we will use the env.py for key values
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
@@ -174,6 +178,3 @@ STRIPE_SECRET = os.getenv('STRIPE_SECRET')
 
 #this is needed due to an issue with cloud9 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
-
-
-
