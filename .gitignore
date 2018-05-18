@@ -2,5 +2,4 @@
 env.py
 static/
 media/
-8.png
-__pycache__
+*.png
