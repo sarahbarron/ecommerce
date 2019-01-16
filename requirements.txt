@@ -1,10 +1,10 @@
-Django==1.11.15
 Pillow==5.1.0
 boto3==1.7.22
 botocore==1.10.22
 chardet==2.2.1
 colorama==0.2.5
 dj-database-url==0.5.0
+django ~> 1.11.18
 django-forms-bootstrap==3.1.0
 django-storages==1.6.6
 gunicorn==19.8.1
